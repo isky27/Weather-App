@@ -24,7 +24,7 @@ export const getWeatherByLocation = (toast) => (dispatch) => {
             dispatch(getDataLoading());
             let weatherData = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&appid=${weatherAppAPI}`);
             weatherData = weatherData.data;
-            let forcastData = await axios.get(`/weather?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+            let forcastData = await axios.get(`/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
             forcastData = forcastData.data.daily;
             let payload = { weatherData, forcastData }
             dispatch(getDataSuccess(payload));
@@ -50,7 +50,7 @@ export const getWeatherByCity = (city, toast) => async (dispatch) => {
         let weatherData = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
         weatherData = weatherData.data;
         let { lon, lat } = weatherData.coord;
-        let forcastData = await axios.get(`/weather?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+        let forcastData = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
         forcastData = forcastData.data.daily;
         let payload = { weatherData, forcastData };
         dispatch(getDataSuccess(payload));
@@ -69,7 +69,7 @@ export const syncData = (city, toast) => async (dispatch) => {
         let weatherData = await axios.get(`/weather?q=${city}&appid=${weatherAppAPI}`);
         weatherData = weatherData.data;
         let { lon, lat } = weatherData.coord;
-        let forcastData = await axios.get(`/weather?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
+        let forcastData = await axios.get(`/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${weatherAppAPI}`);
         forcastData = forcastData.data.daily;
         let payload = { weatherData, forcastData };
         dispatch(getDataSuccess(payload));
